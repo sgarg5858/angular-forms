@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { BanWordsDirective } from '../validators/ban-words.directive';
 
 @Component({
   selector: 'template-form',
   templateUrl: './template-driven-form.component.html',
   standalone:true,
   styleUrls:['./template-driven-form.component.scss'],
-  imports:[FormsModule,CommonModule]
+  imports:[FormsModule,CommonModule,BanWordsDirective],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class TemplateDrivenFormComponent {
+export class TemplateDrivenFormComponent implements OnInit {
 
+  banned=['demo'];
   userInfo={
     firstName:"Sanjay",
     lastName:"Garg",
@@ -29,7 +32,12 @@ export class TemplateDrivenFormComponent {
 
   onSubmit(form:NgForm,event:SubmitEvent)
   {
-    console.log(form.value);
+    console.log(form.controls);
+    this.banned=['demo','test','dummy'];
+  }
+
+  ngOnInit(): void {
+     
   }
 
 }

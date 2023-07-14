@@ -55,7 +55,8 @@
         <input 
         id="=nickName"
         type="text"  
-        [ngModel]="userInfo.nickName" 
+        [ngModel]="userInfo.nickName"
+        [banWords]="banned" 
         #nickName="ngModel"
         name="nickName"
         required
@@ -66,6 +67,12 @@
         *ngIf="nickName.dirty && nickName.errors?.['required']"
         >
         This is required
+        </div>
+        <div 
+        class="input-error"
+        *ngIf="nickName.dirty && nickName.errors?.['banWords']"
+        >
+        {{nickName.errors?.['banWords']}} is not allowed
         </div>
         <div 
         class="input-error"
