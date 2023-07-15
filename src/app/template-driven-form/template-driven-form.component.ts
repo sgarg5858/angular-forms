@@ -3,13 +3,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BanWordsDirective } from '../validators/ban-words.directive';
 import { PasswordShouldMatchDirective } from '../validators/password-should-match.directive';
+import { UniqueUsernameDirective } from '../validators/unique-username.directive';
 
 @Component({
   selector: 'template-form',
   templateUrl: './template-driven-form.component.html',
   standalone:true,
   styleUrls:['./template-driven-form.component.scss'],
-  imports:[FormsModule,CommonModule,BanWordsDirective,PasswordShouldMatchDirective],
+  imports:[FormsModule,CommonModule,
+    BanWordsDirective,PasswordShouldMatchDirective,UniqueUsernameDirective
+  ],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class TemplateDrivenFormComponent implements OnInit {

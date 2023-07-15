@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { TemplateDrivenFormComponent } from './template-driven-form/template-driven-form.component';
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { DynamicFormComponent } from './dynamic/dynamic-form/dynamic-form.component';
-
+import {HttpClientModule} from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,6 +14,7 @@ import { DynamicFormComponent } from './dynamic/dynamic-form/dynamic-form.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     TemplateDrivenFormComponent,
     ReactiveFormComponent,
     DynamicFormComponent

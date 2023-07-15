@@ -55,6 +55,8 @@
         <input 
         id="=nickName"
         type="text"  
+        uniqueName
+        [ngModelOptions]="{updateOn:'blur'}"
         [ngModel]="userInfo.nickName"
         [banWords]="banned" 
         #nickName="ngModel"
@@ -62,6 +64,18 @@
         required
         minlength="2" 
         />
+        <div 
+        class="input-info"
+        *ngIf="nickName.dirty && nickName.pending"
+        >
+        Checking if this is available.....
+        </div>
+        <div 
+        class="input-error"
+        *ngIf="nickName.dirty && nickName.errors?.['appUniqueNickname']"
+        >
+        Sorry, but this name is already taken
+        </div>
         <div 
         class="input-error"
         *ngIf="nickName.dirty && nickName.errors?.['required']"
