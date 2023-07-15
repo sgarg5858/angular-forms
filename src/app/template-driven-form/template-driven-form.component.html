@@ -239,7 +239,7 @@
 
     </fieldset>
 
-    <fieldset ngModelGroup="password">
+    <fieldset ngModelGroup="password" passwordShouldMatch>
         <legend>User Password</legend>
 
         <div class="form-field">
@@ -283,6 +283,11 @@
             *ngIf="confirmPassword.dirty && confirmPassword.errors?.['required']"
             >
             This is required
+            </div>
+            <div class="input-error"
+            *ngIf="confirmPassword.dirty && confirmPassword.errors?.['passwordShouldMatch']"
+            >
+            Password do not match
             </div>
         </div>
 

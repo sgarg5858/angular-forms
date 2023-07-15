@@ -1,4 +1,3 @@
-import { Conditional } from '@angular/compiler';
 import { Directive, Input } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@angular/forms';
 

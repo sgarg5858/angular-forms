@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { BanWordsDirective } from '../validators/ban-words.directive';
+import { PasswordShouldMatchDirective } from '../validators/password-should-match.directive';
 
 @Component({
   selector: 'template-form',
   templateUrl: './template-driven-form.component.html',
   standalone:true,
   styleUrls:['./template-driven-form.component.scss'],
-  imports:[FormsModule,CommonModule,BanWordsDirective],
+  imports:[FormsModule,CommonModule,BanWordsDirective,PasswordShouldMatchDirective],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class TemplateDrivenFormComponent implements OnInit {
@@ -32,7 +33,7 @@ export class TemplateDrivenFormComponent implements OnInit {
 
   onSubmit(form:NgForm,event:SubmitEvent)
   {
-    console.log(form.controls);
+    console.log(form);
     this.banned=['demo','test','dummy'];
   }
 
