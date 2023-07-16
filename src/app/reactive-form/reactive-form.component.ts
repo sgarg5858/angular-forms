@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormRecord, ReactiveFormsModule, Validators } from '@angular/forms';
-import { passwordShouldMatch } from '../validators/password-should-match.directive';
 import { UserSkillsService } from '../services/user-skills.service';
 import { Observable, bufferCount, filter, tap } from 'rxjs';
-import { banWords } from '../validators/ban-words.directive';
 import { UniqueNameValidator } from '../validators/unique-username.directive';
+import { CustomValidators } from '../validators/CustomValidators';
 
 @Component({
   selector: 'reactive-form',
@@ -46,7 +45,7 @@ export class ReactiveFormComponent implements OnInit {
     {
       validators:[
         Validators.required,Validators.minLength(3),
-        banWords('test')
+        CustomValidators.banWords('test')
       ],
       asyncValidators:[this.uniqueNameValidator.validate.bind(this.uniqueNameValidator)]
     }
@@ -62,7 +61,7 @@ export class ReactiveFormComponent implements OnInit {
     password: new FormGroup({
       password:new FormControl('',[Validators.required,Validators.minLength(6)]),
       confirmPassword:new FormControl('')
-    },{validators:[passwordShouldMatch]}),
+    },{validators:[CustomValidators.passwordShouldMatch]}),
 
     skills: new FormRecord<FormControl<boolean>>({})
 
