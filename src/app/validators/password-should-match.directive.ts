@@ -32,3 +32,21 @@ export class PasswordShouldMatchDirective implements Validator {
     return null;
   }
 }
+export const passwordShouldMatch = (control:AbstractControl): ValidationErrors|null=>{
+
+  console.log(control);
+  if(control instanceof FormGroup)
+  {
+    const passwordControl = control.get('password');
+    const confirmPasswordControl = control.get('confirmPassword');
+    if(passwordControl && confirmPasswordControl && passwordControl.value !== confirmPasswordControl.value)
+    {
+      confirmPasswordControl.setErrors({passwordShouldMatch:true})
+      return {passwordShouldMatch:true};
+    }
+    return  null;
+
+  }
+  return null
+
+}

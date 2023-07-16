@@ -59,10 +59,31 @@
         <input type="text" id="nickName" formControlName="nickName"> 
 
         <div 
+        class="input-info"
+        *ngIf=" userForm.controls.nickName.dirty && userForm.controls.nickName.pending"
+        >
+        Checking whether this name is available...
+        </div>
+
+        <div 
+        class="input-error"
+        *ngIf=" userForm.controls.nickName.dirty && userForm.controls.nickName.errors?.['appUniqueNickName']"
+        >
+        Sorry, but this name is already taken.
+        </div>
+
+        <div 
         class="input-error"
         *ngIf=" userForm.controls.nickName.dirty && userForm.controls.nickName.errors?.['required']"
         >
         This field is required
+        </div>
+
+        <div 
+        class="input-error"
+        *ngIf=" userForm.controls.nickName.dirty && userForm.controls.nickName.errors?.['banWords']"
+        >
+         {{userForm.controls.nickName.errors?.['banWords']}} is not allowed
         </div>
 
         <div 
@@ -177,13 +198,26 @@
             <label for="confirmPassword">Confirm Password:</label>
             <input formControlName="confirmPassword" type="password" id="confirmPassword" placeholder="Enter your password again">
 
-            <!-- <div 
+            <div 
             class="input-error"
-            *ngIf=" userForm.controls.password.controls.city.dirty && userForm.controls.password.controls.city.errors?.['required']"
+            *ngIf=" userForm.controls.password.controls.confirmPassword.dirty && userForm.controls.password.controls.confirmPassword.errors?.['passwordShouldMatch']"
             >
-            This field is required
-            </div> -->
+            Passwords do not match
+            </div>
         </div>    
+    </fieldset>
+
+    <fieldset formGroupName="skills">
+        <legend>Select your skillset</legend>
+        <ng-container *ngIf="skills$|async as skills;else loadingSkills">
+            <div class="skill-container"  *ngFor="let skill of skills">
+                <input [formControlName]="skill" type="checkbox" [id]="skill" [value]="skill">
+                <label for="skill">{{skill | titlecase}}</label>
+            </div>
+        </ng-container>
+        <ng-template #loadingSkills>
+            <h5>Loading Skills....</h5>
+        </ng-template>
     </fieldset>
 
 

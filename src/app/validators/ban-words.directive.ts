@@ -52,3 +52,22 @@ export class BanWordsDirective implements Validator {
   }
 
 }
+
+
+export const banWords = (banWords:string|string[]) =>{
+  
+  const bannedWords = Array.isArray(banWords) ? banWords :[banWords];
+
+  return  (control: AbstractControl<string>): ValidationErrors | null => {
+    const value = control.value;
+    console.log(value,bannedWords);
+    const bannedWord = bannedWords.find((word)=> word?.toLowerCase() === value?.toLowerCase());
+    console.log(bannedWord);
+    if(bannedWord)
+    {
+      return { banWords: bannedWord }
+    }
+    return null;
+  }
+
+}

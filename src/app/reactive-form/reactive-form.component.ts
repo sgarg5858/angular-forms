@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { FormControl, FormGroup, FormRecord, ReactiveFormsModule, Validators } from '@angular/forms';
+import { passwordShouldMatch } from '../validators/password-should-match.directive';
+import { UserSkillsService } from '../services/user-skills.service';
+import { Observable, bufferCount, filter, tap } from 'rxjs';
+import { banWords } from '../validators/ban-words.directive';
+import { UniqueNameValidator } from '../validators/unique-username.directive';
 
 @Component({
   selector: 'reactive-form',
@@ -10,7 +15,28 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   imports:[ReactiveFormsModule,CommonModule],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class ReactiveFormComponent {
+export class ReactiveFormComponent implements OnInit {
+
+  userService = inject(UserSkillsService);
+  uniqueNameValidator = inject(UniqueNameValidator);
+  cd=inject(ChangeDetectorRef);
+  skills$!:Observable<string[]>;
+
+  ngOnInit(): void {
+    
+     this.skills$ = this.userService.userSkills().pipe(
+        tap((skills)=>{
+        skills.forEach((skill)=>{
+          this.userForm.controls.skills.addControl(skill,new FormControl<boolean>(false,{nonNullable:true}))
+        })
+      }))
+
+      this.userForm.controls.nickName.statusChanges.pipe(
+        bufferCount(2,1),
+        filter(([prevStatus])=> prevStatus==='PENDING') )
+        .subscribe(()=>{this.cd.markForCheck(); })
+
+  }
 
   userForm = new FormGroup({
     firstName:new FormControl('Sanjay',[Validators.required,Validators.minLength(3)]),
@@ -18,8 +44,11 @@ export class ReactiveFormComponent {
     email:new FormControl('sgarg5858@gmail.com',[Validators.required,Validators.email]),
     nickName:new FormControl('Sanju',
     {
-      validators:[Validators.required,Validators.minLength(3)],
-      asyncValidators:[]
+      validators:[
+        Validators.required,Validators.minLength(3),
+        banWords('test')
+      ],
+      asyncValidators:[this.uniqueNameValidator.validate.bind(this.uniqueNameValidator)]
     }
     ),
     yearOfBirth:new FormControl(1998,[Validators.required,Validators.max(2005)]),
@@ -33,8 +62,10 @@ export class ReactiveFormComponent {
     password: new FormGroup({
       password:new FormControl('',[Validators.required,Validators.minLength(6)]),
       confirmPassword:new FormControl('')
-    },{validators:[]}),
-    
+    },{validators:[passwordShouldMatch]}),
+
+    skills: new FormRecord<FormControl<boolean>>({})
+
   })
 
   onSubmit()
