@@ -1,11 +1,11 @@
 <ng-container [formGroup]="form">
-    
+
     <fieldset [formGroupName]="control.controlKey">
     
         <div class="form-field" *ngFor="let control of control.controlValue.controls | keyvalue">
     
             <ng-container 
-            [ngComponentOutlet]="dynamicComponentResolver.resolve(control.value.controlType)"
+            [ngComponentOutlet]="dynamicComponentResolver.resolve(control.value.controlType) | async"
             [ngComponentOutletInjector]="control.key | controlInjector : control.value "
             >
             </ng-container>
