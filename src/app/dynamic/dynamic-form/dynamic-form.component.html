@@ -1,1 +1,39 @@
-<p>dynamic-form works!</p>
+<div class="dynamic-form-container">
+    <button (click)="formLoadingTrigger.next('user')" type="button">User Form</button>
+    <button (click)="formLoadingTrigger.next('company')" type="button">Company Form</button>
+</div>
+
+<form class="form-container" *ngIf="formConfig$ | async as formConfig" [formGroup]="formGroup">
+    <div class="form-field" *ngFor="let control of formConfig.controls | keyvalue">
+        <ng-container [ngSwitch]="control.value.controlType">
+
+           <ng-container *ngSwitchCase="'input'">
+            <label for="control.key">{{ control.value.label }}</label>
+            <input [formControlName]="control.key" [type]="control.value.type" id="control.key">
+          
+           </ng-container>
+
+           <ng-container *ngSwitchCase="'select'">
+            <label for="control.key">{{ control.value.label }}</label>
+            <select [formControlName]="control.key" id="control.key">
+                <option *ngFor="let option of control.value.options" value="option.value">
+                    {{option.label}}
+                </option>
+            </select>
+            
+           </ng-container>
+           <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('required')">
+            This field is required
+            </div>
+            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('email')">
+                This field should be valid email 
+            </div>
+            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('banWords')">
+             {{formGroup.get(control.key)?.getError('banWords')}} word is not allowed
+            </div>
+            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('minLength')">
+                The length should be atleast {{ formGroup.get(control.key)?.['errors']?.['minLength']?.['requiredLength'] }}  characters
+            </div>
+        </ng-container>
+    </div>
+</form>

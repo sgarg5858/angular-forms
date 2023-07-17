@@ -44,9 +44,10 @@ fieldset{
     max-height: 100px;
     margin-top: 16px;
 
-    input{
+    input,select{
         height: 40px;
         border-radius: 4px;
+        border: 1px solid gray;
     }
 }
 .input-error{

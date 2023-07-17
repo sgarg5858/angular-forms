@@ -35,6 +35,7 @@ export class BanWordsDirective implements Validator {
   }
   inputChanged = () =>{};
   constructor() { }
+  
   validate(control: AbstractControl<string>): ValidationErrors | null {
     const value = control.value;
     console.log(value,this.bannedWords);
