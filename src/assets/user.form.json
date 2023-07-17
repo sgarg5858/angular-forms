@@ -42,6 +42,43 @@
         "validators":{
             "requiredTrue":true
         }  
+    },
+    "socialProfiles":{
+        "controlType":"group",
+        "label":"Links to social profiles",
+        "controls":{
+            "instagram":{
+                "controlType":"input",
+                "type":"text",
+                "label":"Instagram Link",
+                "value":"",
+                "validators":{
+                    "required":true
+                },
+                "order":3
+            },
+            "linkedin":{
+                "controlType":"input",
+                "type":"text",
+                "label":"Linkedin Link",
+                "value":"",
+                "validators":{
+                    "required":true
+                },
+                "order":2
+            },
+            "twitter":{
+                "controlType":"input",
+                "type":"text",
+                "label":"Twitter Link",
+                "value":"",
+                "validators":{
+                    "required":true
+                }
+                ,
+                "order":1
+            }
+        }
     }
     }
 }

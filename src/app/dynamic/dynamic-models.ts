@@ -11,12 +11,13 @@ export type ValidatorKeys =keyof Omit<typeof Validators , 'composeAsync'|'compos
 export type CombinedValidators = ValidatorKeys | keyof Omit< typeof CustomValidators , 'prototype'>
 
 export interface DynamicControl<T=string>{
-    controlType:"input"|"select"|"checkbox";
+    controlType:"input"|"select"|"checkbox"|"group";
     type?:'text'|'email'|'number';
     label:string;
     value: T |null;
     options?: DynamicOption<T>[];
-    validators?: {[key in CombinedValidators]:unknown}
+    validators?: {[key in CombinedValidators]:unknown};
+    controls?:DynamicFormConfig['controls']
 }
 
 export interface DynamicFormConfig{

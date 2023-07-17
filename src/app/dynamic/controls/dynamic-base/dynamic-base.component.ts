@@ -16,7 +16,7 @@ import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms'
 })
 export class DynamicBaseComponent {
 
-  formGroup = inject(FormGroupDirective,{skipSelf:true});
+  formGroup = inject(ControlContainer,{skipSelf:true});
   get form()
   {
     return this.formGroup.control as FormGroup;

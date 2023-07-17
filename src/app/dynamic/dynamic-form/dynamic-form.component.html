@@ -5,24 +5,6 @@
 
 <form  (ngSubmit)="log()" class="form-container" *ngIf="formConfig$ | async as formConfig" [formGroup]="formGroup">
     <div class="form-field" *ngFor="let control of formConfig.controls | keyvalue">
-        <ng-container [ngSwitch]="control.value.controlType">
-
-           <!-- <ng-container *ngSwitchCase="'input'">
-            <label for="control.key">{{ control.value.label }}</label>
-            <input [formControlName]="control.key" [type]="control.value.type" id="control.key">
-          
-           </ng-container>
-
-           <ng-container *ngSwitchCase="'select'">
-            <label for="control.key">{{ control.value.label }}</label>
-            <select [formControlName]="control.key" id="control.key">
-                <option *ngFor="let option of control.value.options" value="option.value">
-                    {{option.label}}
-                </option>
-            </select>
-            
-           </ng-container> -->
-
 
            <ng-container 
            [ngComponentOutlet]="dynamicComponentResolver.resolve(control.value.controlType)"
@@ -42,7 +24,22 @@
             <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('minLength')">
                 The length should be atleast {{ formGroup.get(control.key)?.['errors']?.['minLength']?.['requiredLength'] }}  characters
             </div>
-        </ng-container>
     </div>
     <button type="submit">Save</button>
 </form>
+
+ <!-- <ng-container *ngSwitchCase="'input'">
+            <label for="control.key">{{ control.value.label }}</label>
+            <input [formControlName]="control.key" [type]="control.value.type" id="control.key">
+          
+           </ng-container>
+
+           <ng-container *ngSwitchCase="'select'">
+            <label for="control.key">{{ control.value.label }}</label>
+            <select [formControlName]="control.key" id="control.key">
+                <option *ngFor="let option of control.value.options" value="option.value">
+                    {{option.label}}
+                </option>
+            </select>
+            
+           </ng-container> -->

@@ -26,18 +26,40 @@ export class DynamicFormComponent {
   public formConfig$ = this.formLoadingTrigger.pipe(
     switchMap((configSource)=> this.httpClient.get<DynamicFormConfig>(`/assets/${configSource}.form.json`)),
     tap((config)=>{
-      this.buildFormControls(config.controls);
+
+      const controls=config.controls;
+      this.formGroup = new FormGroup({});
+
+      Object.keys(controls).forEach((key:string)=>{
+        this.buildFormControls(key,controls[key],this.formGroup)
+      });
+      console.log(this.formGroup);
+
     })
   );
 
-  buildFormControls(controls:DynamicFormConfig['controls'])
+  buildFormGroup(controlKey:string,control:DynamicControl,parentFormGroup:FormGroup)
   {
-    this.formGroup = new FormGroup({});
+    const nestedFormgroup = new FormGroup({});
+    const controls =control.controls;
+    if(!controls) return;
+
     Object.keys(controls).forEach((key:string)=>{
-      const validators = this.resolveValidators(controls[key].validators)
-      this.formGroup.addControl(key, new FormControl(controls[key].value,validators))
+      this.buildFormControls(key,controls[key],nestedFormgroup)
     });
-    console.log(this.formGroup);
+    
+    parentFormGroup.addControl(controlKey, nestedFormgroup);
+  }
+
+  buildFormControls(controlKey:string,control:DynamicControl,parentFormGroup:FormGroup)
+  {
+    if(control.controlType ==='group')
+    {
+      this.buildFormGroup(controlKey,control,parentFormGroup)
+      return 
+    }
+      const validators = this.resolveValidators(control.validators)
+      parentFormGroup.addControl(controlKey, new FormControl(control.value,validators));
   }
 
   resolveValidators(validators:DynamicControl['validators']):ValidatorFn[]
