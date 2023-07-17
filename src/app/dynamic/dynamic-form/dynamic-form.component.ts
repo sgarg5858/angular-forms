@@ -5,15 +5,19 @@ import { Subject, switchMap, tap } from 'rxjs';
 import { DynamicControl, DynamicFormConfig } from '../dynamic-models';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/validators/CustomValidators';
+import { DynamicComponentResolver } from '../controls/dynamic-component-resolver.service';
+import { ControlInjectorPipe } from '../controls/control-injector.pipe';
 
 @Component({
   selector: 'dynamic-form',
   templateUrl: './dynamic-form.component.html',
   standalone:true,
   styleUrls: ['./dynamic-form.component.scss'],
-  imports:[CommonModule,ReactiveFormsModule]
+  imports:[CommonModule,ReactiveFormsModule,ControlInjectorPipe]
 })
 export class DynamicFormComponent {
+
+  dynamicComponentResolver = inject(DynamicComponentResolver);
 
   formGroup!:FormGroup;
   private httpClient= inject(HttpClient);
@@ -45,6 +49,10 @@ export class DynamicFormComponent {
       {
         return Validators.required
       }
+      if(key ==='requiredTrue')
+      {
+        return Validators.requiredTrue
+      }
       if(key ==='email')
       {
         return Validators.email
@@ -59,6 +67,12 @@ export class DynamicFormComponent {
       }
       return Validators.nullValidator
     })
+  }
+
+  log()
+  {
+    console.log(this.formGroup);
+    console.log(this.formGroup.value);
   }
   
 

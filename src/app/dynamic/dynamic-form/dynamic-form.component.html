@@ -3,11 +3,11 @@
     <button (click)="formLoadingTrigger.next('company')" type="button">Company Form</button>
 </div>
 
-<form class="form-container" *ngIf="formConfig$ | async as formConfig" [formGroup]="formGroup">
+<form  (ngSubmit)="log()" class="form-container" *ngIf="formConfig$ | async as formConfig" [formGroup]="formGroup">
     <div class="form-field" *ngFor="let control of formConfig.controls | keyvalue">
         <ng-container [ngSwitch]="control.value.controlType">
 
-           <ng-container *ngSwitchCase="'input'">
+           <!-- <ng-container *ngSwitchCase="'input'">
             <label for="control.key">{{ control.value.label }}</label>
             <input [formControlName]="control.key" [type]="control.value.type" id="control.key">
           
@@ -21,7 +21,15 @@
                 </option>
             </select>
             
+           </ng-container> -->
+
+
+           <ng-container 
+           [ngComponentOutlet]="dynamicComponentResolver.resolve(control.value.controlType)"
+           [ngComponentOutletInjector]="control.key | controlInjector : control.value "
+           >
            </ng-container>
+
            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('required')">
             This field is required
             </div>
@@ -36,4 +44,5 @@
             </div>
         </ng-container>
     </div>
+    <button type="submit">Save</button>
 </form>

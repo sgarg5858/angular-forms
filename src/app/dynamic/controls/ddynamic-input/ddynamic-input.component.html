@@ -1,0 +1,4 @@
+<ng-container [formGroup]="form">
+    <label [for]="control.controlKey">{{ control.controlValue.label }}</label>
+<input [formControlName]="control.controlKey" [type]="control.controlValue.type" [id]="control.controlKey">
+</ng-container>

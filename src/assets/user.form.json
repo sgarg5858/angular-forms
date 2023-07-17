@@ -34,6 +34,14 @@
         "validators":{
             "required":true
         }  
+    },
+    "terms":{
+        "controlType":"checkbox",
+        "label":"Terms & Conditions",
+        "value":"",
+        "validators":{
+            "requiredTrue":true
+        }  
     }
     }
 }
