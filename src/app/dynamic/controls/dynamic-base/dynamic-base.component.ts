@@ -58,6 +58,10 @@ export class DynamicBaseComponent  implements OnInit{
       {
         return Validators.minLength(value)
       }
+      if(key ==='passwordShouldMatch' )
+      {
+        return CustomValidators.passwordShouldMatch
+      }
       return Validators.nullValidator
     })
   }

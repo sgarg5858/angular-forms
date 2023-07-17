@@ -21,8 +21,11 @@
             <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('banWords')">
              {{formGroup.get(control.key)?.getError('banWords')}} word is not allowed
             </div>
-            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('minLength')">
-                The length should be atleast {{ formGroup.get(control.key)?.['errors']?.['minLength']?.['requiredLength'] }}  characters
+            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('minlength')">
+                The length should be atleast {{ formGroup.get(control.key)?.['errors']?.['minlength']?.['requiredLength'] }}  characters
+            </div>
+            <div class="input-error" *ngIf="formGroup.get(control.key)?.dirty && formGroup.get(control.key)?.hasError('passwordShouldMatch')">
+                Password do not match
             </div>
     </div>
     <button type="submit">Save</button>

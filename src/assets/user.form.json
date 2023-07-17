@@ -79,6 +79,32 @@
                 "order":1
             }
         }
+    },
+    "password":{
+        "controlType":"group",
+        "label":"User Password",
+        "controls":{
+            "password":{
+                "controlType":"input",
+                "type":"password",
+                "label":"Password",
+                "value":"",
+                "validators":{
+                    "required":true,
+                    "minLength":6
+                }
+            },
+            "confirmPassword":{
+                "controlType":"input",
+                "type":"password",
+                "label":"Confirm Password",
+                "value":""
+            }
+        },
+        "validators":{
+            "passwordShouldMatch":true
+        }
     }
     }
+    
 }

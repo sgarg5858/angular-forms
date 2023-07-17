@@ -15,6 +15,6 @@ import { DynamicBaseComponent, controlContainerProvider } from '../dynamic-base/
 export class DynamicGroupComponent extends DynamicBaseComponent {
 
   dynamicComponentResolver = inject(DynamicComponentResolver);
-  override formControl = new FormGroup({});
+  override formControl = new FormGroup({},{validators:this.resolveValidators(this.control.controlValue.validators)});
 
 }
