@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DynamicBaseComponent } from '../dynamic-base/dynamic-base.component';
+import { DynamicBaseComponent, controlContainerProvider } from '../dynamic-base/dynamic-base.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -7,7 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   selector: 'app-ddynamic-select',
   templateUrl: './ddynamic-select.component.html',
   standalone:true,
-  imports:[CommonModule,ReactiveFormsModule]
+  imports:[CommonModule,ReactiveFormsModule],
+  viewProviders:[controlContainerProvider]
 })
 export class DdynamicSelectComponent extends DynamicBaseComponent {
 
