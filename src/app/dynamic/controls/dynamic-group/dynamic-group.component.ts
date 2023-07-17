@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { DynamicComponentResolver } from '../dynamic-component-resolver.service';
 import { CommonModule } from '@angular/common';
 import { ControlInjectorPipe } from '../control-injector.pipe';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicBaseComponent, controlContainerProvider } from '../dynamic-base/dynamic-base.component';
 
 @Component({
@@ -15,5 +15,6 @@ import { DynamicBaseComponent, controlContainerProvider } from '../dynamic-base/
 export class DynamicGroupComponent extends DynamicBaseComponent {
 
   dynamicComponentResolver = inject(DynamicComponentResolver);
+  override formControl = new FormGroup({});
 
 }

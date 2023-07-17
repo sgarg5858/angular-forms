@@ -25,71 +25,12 @@ export class DynamicFormComponent {
 
   public formConfig$ = this.formLoadingTrigger.pipe(
     switchMap((configSource)=> this.httpClient.get<DynamicFormConfig>(`/assets/${configSource}.form.json`)),
-    tap((config)=>{
-
-      const controls=config.controls;
+    tap(()=>{
       this.formGroup = new FormGroup({});
-
-      Object.keys(controls).forEach((key:string)=>{
-        this.buildFormControls(key,controls[key],this.formGroup)
-      });
-      console.log(this.formGroup);
-
     })
   );
 
-  buildFormGroup(controlKey:string,control:DynamicControl,parentFormGroup:FormGroup)
-  {
-    const nestedFormgroup = new FormGroup({});
-    const controls =control.controls;
-    if(!controls) return;
 
-    Object.keys(controls).forEach((key:string)=>{
-      this.buildFormControls(key,controls[key],nestedFormgroup)
-    });
-    
-    parentFormGroup.addControl(controlKey, nestedFormgroup);
-  }
-
-  buildFormControls(controlKey:string,control:DynamicControl,parentFormGroup:FormGroup)
-  {
-    if(control.controlType ==='group')
-    {
-      this.buildFormGroup(controlKey,control,parentFormGroup)
-      return 
-    }
-      const validators = this.resolveValidators(control.validators)
-      parentFormGroup.addControl(controlKey, new FormControl(control.value,validators));
-  }
-
-  resolveValidators(validators:DynamicControl['validators']):ValidatorFn[]
-  {
-    if(!validators) return [];
-    return (Object.keys(validators) as Array<keyof typeof validators> ).map((key)=>{
-      const value = validators[key]; 
-      if(key ==='required')
-      {
-        return Validators.required
-      }
-      if(key ==='requiredTrue')
-      {
-        return Validators.requiredTrue
-      }
-      if(key ==='email')
-      {
-        return Validators.email
-      }
-      if(key ==='banWords' && (typeof value === 'string' || Array.isArray(value) ))
-      {
-        return CustomValidators.banWords(value)
-      }
-      if(key ==='minLength' && typeof value ==='number')
-      {
-        return Validators.minLength(value)
-      }
-      return Validators.nullValidator
-    })
-  }
 
   log()
   {
