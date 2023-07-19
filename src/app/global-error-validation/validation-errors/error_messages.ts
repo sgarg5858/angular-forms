@@ -10,15 +10,15 @@ export const ERROR_MESSAGES: { [key: string]: (errors:any)=> string } = {
     },
     max:(errors) => {
       console.log(errors);
-      return `The length should be atleast ${errors.requiredLength} characters`
+      return `The length should be atleast characters`
     },
-    banWords:(errors)=> `This word isn't allowed`,
-    appBanWords:(errors)=> `This word isn't allowed`,
-    appPasswordShouldMatch: (errors)=> `Password should match`,
-    passwordShouldMatch: (errors)=> `Password should match`,
-    pattern: (errors)=> `Wrong format`,
-    appUniqueNickName: (errors)=> `Nickname is taken`,
-    uniqueName: (errors)=> `Nickname is taken`,
+    banWords:()=> `This word isn't allowed`,
+    appBanWords:()=> `This word isn't allowed`,
+    appPasswordShouldMatch: ()=> `Password should match`,
+    passwordShouldMatch: ()=> `Password should match`,
+    pattern: ()=> `Wrong format`,
+    appUniqueNickName: ()=> `Nickname is taken`,
+    uniqueName: ()=> `Nickname is taken`,
   }
 
   export const VALIDATION_ERROR_MESSAGES = new InjectionToken('Validation Error Messages',{
