@@ -7,6 +7,7 @@ import { UniqueNameValidator } from '../validators/unique-username.directive';
 import { CustomValidators } from '../validators/CustomValidators';
 import { ValidationErrorsComponent } from '../global-error-validation/validation-errors/validation-errors.component';
 import { DynamicValidatorMessageDirective } from '../global-error-validation/dynamic-validator-message.directive';
+import { OnTouchedErrorStateMatcher } from '../global-error-validation/error-state-matcher.service';
 
 @Component({
   selector: 'reactive-form',
@@ -18,6 +19,7 @@ import { DynamicValidatorMessageDirective } from '../global-error-validation/dyn
 })
 export class ReactiveFormComponent implements OnInit {
 
+  onTouchedErrorStateMatcher = new OnTouchedErrorStateMatcher();
   userService = inject(UserSkillsService);
   uniqueNameValidator = inject(UniqueNameValidator);
   cd=inject(ChangeDetectorRef);
