@@ -1,15 +1,20 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { VALIDATION_ERROR_MESSAGES } from './error_messages';
-import { CommonModule } from '@angular/common';
+import { CommonModule, KeyValue } from '@angular/common';
+import { ErrorMessagePipe } from '../error-message.pipe';
 
 @Component({
   selector: 'validation-errors',
   templateUrl: './validation-errors.component.html',
   standalone:true,
-  imports:[CommonModule]
+  imports:[CommonModule,ErrorMessagePipe]
 })
-export class ValidationErrorsComponent {
+export class ValidationErrorsComponent  {
+
   @Input() errors: ValidationErrors | null = null;
-  errorsMap = inject(VALIDATION_ERROR_MESSAGES) ;
+ 
+  trackByFn = (_:number,item:KeyValue<string,any>) =>{
+    return item.key;
+  }
+  
 }

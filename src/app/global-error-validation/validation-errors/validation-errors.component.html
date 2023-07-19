@@ -1,5 +1,5 @@
-<div class="input-error" *ngFor="let error of errors | keyvalue">
+<div class="input-error" *ngFor="let error of errors | keyvalue;trackBy:trackByFn">
     {{
-        errorsMap[error.key](error.value)
+        error.key | errorMessage : error.value
     }}
 </div>
