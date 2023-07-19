@@ -11,10 +11,10 @@ import { ErrorMessagePipe } from '../error-message.pipe';
 })
 export class ValidationErrorsComponent  {
 
-  @Input() errors: ValidationErrors | null = null;
+  @Input() errors: ValidationErrors | null | undefined = null;
  
   trackByFn = (_:number,item:KeyValue<string,any>) =>{
     return item.key;
   }
-  
+
 }

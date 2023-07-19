@@ -5,12 +5,12 @@ import { ValidationErrorsComponent } from './validation-errors/validation-errors
 import { ErrorStateMatcher } from './error-state-matcher.service';
 
 @Directive({
-  selector: '[ngModel],[formControlName],[formControl]',
+  selector: '[ngModel],[formControlName],[formControl],[formGroupName],[ngModelGroup]',
   standalone:true
 })
 export class DynamicValidatorMessageDirective implements OnInit,OnDestroy {
 
-  ngControl = inject(NgControl,{self:true});
+  ngControl = inject(NgControl,{self:true,optional:true}) || inject(ControlContainer,{self:true,optional:true});
 
   @Input() errorStateMatcher = inject(ErrorStateMatcher);
   private parentContainer= inject(ControlContainer,{optional:true});
@@ -27,24 +27,27 @@ export class DynamicValidatorMessageDirective implements OnInit,OnDestroy {
 
   ngOnInit(): void {
 
-    if(!this.ngControl.control)
-      {
-        throw new Error(`No control model for ${this.ngControl.name}`);
-      }
+    //Required For Template Driven Forms
+   queueMicrotask(()=>{
+
+    if(!this.ngControl?.control)
+    {
+      throw new Error(`No control model for ${this.ngControl?.name}`);
+    }
 
     this.statusChangesSubscription =  this.ngControl.control?.statusChanges.pipe(
       startWith(this.ngControl.status),
       skip(this.ngControl instanceof NgModel ? 1 : 0)
     )
     .subscribe(()=>{
-        if(this.errorStateMatcher.isErrorVisible(this.ngControl.control,this.form))
+        if(this.errorStateMatcher.isErrorVisible(this.ngControl?.control,this.form))
         {
           if(!this.componentRef)
           {
             this.componentRef=this.viewContainerRef.createComponent(ValidationErrorsComponent);
           }
           //Putting it outside as , it might happen, that just error changes
-          this.componentRef.instance.errors=this.ngControl.errors;
+          this.componentRef.instance.errors=this.ngControl?.errors;
           this.cd.markForCheck();
 
         }else
@@ -53,6 +56,8 @@ export class DynamicValidatorMessageDirective implements OnInit,OnDestroy {
           this.componentRef=null;
         }
       })
+
+   })
   }
 
   ngOnDestroy(): void {
