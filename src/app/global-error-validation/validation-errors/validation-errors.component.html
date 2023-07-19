@@ -1,5 +1,5 @@
 <div class="input-error" *ngFor="let error of errors | keyvalue">
     {{
-        errorsMap[error.key]
+        errorsMap[error.key](error.value)
     }}
 </div>
