@@ -12,11 +12,6 @@
         minlength="3" 
         />
 
-        <validation-errors 
-        *ngIf="firstName.dirty" 
-        [errors]="firstName.errors"
-        ></validation-errors>
-
     </div>
 
     <div class="form-field">
@@ -30,10 +25,6 @@
         required
         minlength="2" 
         />
-        <validation-errors 
-        *ngIf="lastName.dirty" 
-        [errors]="lastName.errors"
-        ></validation-errors>
     </div>
 
     <div class="form-field">
@@ -56,14 +47,7 @@
         *ngIf="nickName.dirty && nickName.pending"
         >
         Checking if this is available.....
-        </div>
-
-        <validation-errors 
-        *ngIf="nickName.dirty" 
-        [errors]="nickName.errors"
-        ></validation-errors>
-       
-        
+        </div>        
     </div>
 
     <div class="form-field">
@@ -77,11 +61,7 @@
         email
         required
         />
-       
-        <validation-errors 
-        *ngIf="email.dirty" 
-        [errors]="email.errors"
-        ></validation-errors>
+
     </div>
 
     <div class="form-field">
@@ -97,10 +77,6 @@
         required
         />
        
-        <validation-errors 
-        *ngIf="contact.dirty" 
-        [errors]="contact.errors"
-        ></validation-errors>
     </div>
 
     <div class="form-field">
@@ -115,11 +91,7 @@
         maxlength="4"
         required
         />
-       
-        <validation-errors 
-        *ngIf="yearOfBirth.dirty" 
-        [errors]="yearOfBirth.errors"
-        ></validation-errors>
+
     </div>
 
     <div class="form-field">
@@ -132,11 +104,7 @@
         name="passport"
         [required]="isAdult"
         />
-      
-        <validation-errors 
-        *ngIf="passport.dirty" 
-        [errors]="passport.errors"
-        ></validation-errors>
+
     </div>
 
     <fieldset ngModelGroup="address">
@@ -152,11 +120,7 @@
             name="street"
             required
             />
-            
-            <validation-errors 
-            *ngIf="street.dirty" 
-            [errors]="street.errors"
-            ></validation-errors>
+
         </div>
 
         
@@ -170,11 +134,7 @@
             name="city"
             required
             />
-            
-                <validation-errors 
-                *ngIf="city.dirty" 
-                [errors]="city.errors"
-                ></validation-errors>
+
         </div>
 
         
@@ -188,11 +148,7 @@
             name="postCode"
             required
             />
-            
-                <validation-errors 
-                *ngIf="postCode.dirty" 
-                [errors]="postCode.errors"
-                ></validation-errors>
+
         </div>
     
 
@@ -212,11 +168,6 @@
             required
             minlength="6"
             />
-            
-                <validation-errors 
-                *ngIf="password.dirty" 
-                [errors]="password.errors"
-                ></validation-errors>
         </div>
 
         
@@ -230,11 +181,7 @@
             name="confirmPassword"
             required
             />
-           
-            <validation-errors 
-            *ngIf="confirmPassword.dirty" 
-            [errors]="confirmPassword.errors"
-            ></validation-errors>
+
         </div>
 
     </fieldset>

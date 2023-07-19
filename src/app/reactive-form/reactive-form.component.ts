@@ -6,13 +6,14 @@ import { Observable, bufferCount, filter, tap } from 'rxjs';
 import { UniqueNameValidator } from '../validators/unique-username.directive';
 import { CustomValidators } from '../validators/CustomValidators';
 import { ValidationErrorsComponent } from '../global-error-validation/validation-errors/validation-errors.component';
+import { DynamicValidatorMessageDirective } from '../global-error-validation/dynamic-validator-message.directive';
 
 @Component({
   selector: 'reactive-form',
   templateUrl: './reactive-form.component.html',
   standalone:true,
   styleUrls: ['./reactive-form.component.scss'],
-  imports:[ReactiveFormsModule,CommonModule,ValidationErrorsComponent],
+  imports:[ReactiveFormsModule,CommonModule,ValidationErrorsComponent,DynamicValidatorMessageDirective],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ReactiveFormComponent implements OnInit {
@@ -39,7 +40,7 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   userForm = new FormGroup({
-    firstName:new FormControl('Sanjay',[Validators.required,Validators.minLength(3)]),
+    firstName:new FormControl('',[Validators.required,Validators.minLength(3)]),
     lastName:new FormControl('Garg',[Validators.required]),
     email:new FormControl('sgarg5858@gmail.com',[Validators.required,Validators.email]),
     nickName:new FormControl('Sanju',

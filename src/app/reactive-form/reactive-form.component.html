@@ -3,32 +3,18 @@
     <div class="form-field">
         <label for="firstName">First name</label>
         <input type="text" id="firstName" formControlName="firstName"> 
-
-        <validation-errors 
-        *ngIf="userForm.controls.firstName.dirty" 
-        [errors]="userForm.controls.firstName.errors"
-        ></validation-errors>
+       
     </div>
 
     <div class="form-field">
         <label for="lastName">Last name</label>
         <input type="text" id="lastName" formControlName="lastName"> 
 
-        <validation-errors 
-        *ngIf="userForm.controls.lastName.dirty"  
-        [errors]="userForm.controls.lastName.errors"
-        ></validation-errors>
-
     </div>
 
     <div class="form-field">
         <label for="email">Email</label>
         <input type="email" id="email" formControlName="email"> 
-
-        <validation-errors 
-        *ngIf="userForm.controls.email.dirty"  
-        [errors]="userForm.controls.email.errors"
-        ></validation-errors>
 
     </div>
 
@@ -43,21 +29,11 @@
         Checking whether this name is available...
         </div>
 
-        <validation-errors 
-        *ngIf="userForm.controls.nickName.dirty"  
-        [errors]="userForm.controls.nickName.errors"
-        ></validation-errors>
-
     </div>
 
     <div class="form-field">
         <label for="yearOfBirth">Year Of Birth</label>
         <input type="number" id="yearOfBirth" formControlName="yearOfBirth"> 
-
-        <validation-errors 
-        *ngIf="userForm.controls.yearOfBirth.dirty"  
-        [errors]="userForm.controls.yearOfBirth.errors"
-        ></validation-errors>
         
     </div>
 
@@ -65,11 +41,6 @@
         <label for="passport">Passport</label>
         <input type="text" id="passport" formControlName="passport"> 
 
-        <validation-errors 
-        *ngIf="userForm.controls.passport.dirty"  
-        [errors]="userForm.controls.passport.errors"
-        ></validation-errors>
-    
     </div>
 
     <fieldset formGroupName="address">
@@ -77,31 +48,16 @@
         <div class="form-field">
             <label for="fullAddress">Full Address:</label>
             <input formControlName="street"  type="text" id="fullAddress" placeholder="Enter your full address">
-            
-            <validation-errors 
-            *ngIf="userForm.controls.address.controls.street.dirty"  
-            [errors]="userForm.controls.address.controls.street.errors"
-            ></validation-errors>
 
         </div>
         <div class="form-field">
             <label for="city">City:</label>
             <input formControlName="city" type="text" id="city" placeholder="Enter your city">
 
-            <validation-errors 
-            *ngIf="userForm.controls.address.controls.city.dirty"  
-            [errors]="userForm.controls.address.controls.city.errors"
-            ></validation-errors>
-
         </div>
         <div class="form-field">
             <label for="postCode">Post Code:</label>
             <input formControlName="postCode"  type="text" id="postCode" placeholder="Enter your postCode">
-
-            <validation-errors 
-            *ngIf="userForm.controls.address.controls.postCode.dirty"  
-            [errors]="userForm.controls.address.controls.postCode.errors"
-            ></validation-errors>
 
         </div>
     </fieldset>
@@ -112,20 +68,11 @@
             <label for="password">Password:</label>
             <input formControlName="password"  type="password" id="password" placeholder="Enter your password">
             
-            <validation-errors 
-            *ngIf="userForm.controls.password.controls.password.dirty"  
-            [errors]="userForm.controls.password.controls.password.errors"
-            ></validation-errors>
 
         </div>
         <div class="form-field">
             <label for="confirmPassword">Confirm Password:</label>
             <input formControlName="confirmPassword" type="password" id="confirmPassword" placeholder="Enter your password again">
-
-            <validation-errors 
-            *ngIf="userForm.controls.password.controls.confirmPassword.dirty"  
-            [errors]="userForm.controls.password.controls.confirmPassword.errors"
-            ></validation-errors>
 
         </div>    
     </fieldset>
