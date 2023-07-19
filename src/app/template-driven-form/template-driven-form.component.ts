@@ -4,6 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { BanWordsDirective } from '../validators/ban-words.directive';
 import { PasswordShouldMatchDirective } from '../validators/password-should-match.directive';
 import { UniqueUsernameDirective } from '../validators/unique-username.directive';
+import { ValidationErrorsComponent } from '../global-error-validation/validation-errors/validation-errors.component';
 
 @Component({
   selector: 'template-form',
@@ -11,7 +12,8 @@ import { UniqueUsernameDirective } from '../validators/unique-username.directive
   standalone:true,
   styleUrls:['./template-driven-form.component.scss'],
   imports:[FormsModule,CommonModule,
-    BanWordsDirective,PasswordShouldMatchDirective,UniqueUsernameDirective
+    BanWordsDirective,PasswordShouldMatchDirective,UniqueUsernameDirective,
+    ValidationErrorsComponent
   ],
   changeDetection:ChangeDetectionStrategy.OnPush
 })

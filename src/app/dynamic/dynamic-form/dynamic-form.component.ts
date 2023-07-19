@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Subject, switchMap, tap } from 'rxjs';
-import { DynamicControl, DynamicFormConfig } from '../dynamic-models';
-import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { CustomValidators } from 'src/app/validators/CustomValidators';
+import {  DynamicFormConfig } from '../dynamic-models';
+import {  FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DynamicComponentResolver } from '../controls/dynamic-component-resolver.service';
 import { ControlInjectorPipe } from '../controls/control-injector.pipe';
 
@@ -29,9 +28,6 @@ export class DynamicFormComponent {
       this.formGroup = new FormGroup({});
     })
   );
-
-
-
   log()
   {
     console.log(this.formGroup);

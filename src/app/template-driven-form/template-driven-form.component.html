@@ -11,18 +11,12 @@
         required
         minlength="3" 
         />
-        <div 
-        class="input-error"
-        *ngIf="firstName.dirty && firstName.errors?.['required']"
-        >
-        This is required
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="firstName.dirty && firstName.errors?.['minlength']"
-        >
-        The length should be atleast {{firstName.errors?.['minlength']?.['requiredLength']}} characters
-        </div>
+
+        <validation-errors 
+        *ngIf="firstName.dirty" 
+        [errors]="firstName.errors"
+        ></validation-errors>
+
     </div>
 
     <div class="form-field">
@@ -36,18 +30,10 @@
         required
         minlength="2" 
         />
-        <div 
-        class="input-error"
-        *ngIf="lastName.dirty && lastName.errors?.['required']"
-        >
-        This is required
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="lastName.dirty && lastName.errors?.['minlength']"
-        >
-        The length should be atleast {{lastName.errors?.['minlength']?.['requiredLength']}} characters
-        </div>
+        <validation-errors 
+        *ngIf="lastName.dirty" 
+        [errors]="lastName.errors"
+        ></validation-errors>
     </div>
 
     <div class="form-field">
@@ -64,36 +50,20 @@
         required
         minlength="2" 
         />
+
         <div 
         class="input-info"
         *ngIf="nickName.dirty && nickName.pending"
         >
         Checking if this is available.....
         </div>
-        <div 
-        class="input-error"
-        *ngIf="nickName.dirty && nickName.errors?.['appUniqueNickname']"
-        >
-        Sorry, but this name is already taken
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="nickName.dirty && nickName.errors?.['required']"
-        >
-        This is required
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="nickName.dirty && nickName.errors?.['banWords']"
-        >
-        {{nickName.errors?.['banWords']}} is not allowed
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="nickName.dirty && nickName.errors?.['minlength']"
-        >
-        The length should be atleast {{nickName.errors?.['minlength']?.['requiredLength']}} characters
-        </div>
+
+        <validation-errors 
+        *ngIf="nickName.dirty" 
+        [errors]="nickName.errors"
+        ></validation-errors>
+       
+        
     </div>
 
     <div class="form-field">
@@ -107,18 +77,11 @@
         email
         required
         />
-        <div 
-        class="input-error"
-        *ngIf="email.dirty && email.errors?.['required']"
-        >
-        This is required
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="email.dirty && email.errors?.['email']"
-        >
-        Please enter valid email
-        </div>
+       
+        <validation-errors 
+        *ngIf="email.dirty" 
+        [errors]="email.errors"
+        ></validation-errors>
     </div>
 
     <div class="form-field">
@@ -133,18 +96,11 @@
         maxlength="10"
         required
         />
-        <div 
-        class="input-error"
-        *ngIf="contact.dirty && contact.errors?.['required']"
-        >
-        Contact is required
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="contact.dirty && (contact.errors?.['minlength'] || contact.errors?.['maxlength'])"
-        >
-        The length should be {{contact.errors?.['minlength']?.['requiredLength'] || contact.errors?.['maxlength']?.['requiredLength']}} characters
-        </div>
+       
+        <validation-errors 
+        *ngIf="contact.dirty" 
+        [errors]="contact.errors"
+        ></validation-errors>
     </div>
 
     <div class="form-field">
@@ -159,18 +115,11 @@
         maxlength="4"
         required
         />
-        <div 
-        class="input-error"
-        *ngIf="yearOfBirth.dirty && yearOfBirth.errors?.['required']"
-        >
-        This is required
-        </div>
-        <div 
-        class="input-error"
-        *ngIf="yearOfBirth.dirty && (yearOfBirth.errors?.['minlength'] || yearOfBirth.errors?.['maxlength'])"
-        >
-        The length should be {{yearOfBirth.errors?.['minlength']?.['requiredLength'] || yearOfBirth.errors?.['maxlength']?.['requiredLength']}} characters
-        </div>
+       
+        <validation-errors 
+        *ngIf="yearOfBirth.dirty" 
+        [errors]="yearOfBirth.errors"
+        ></validation-errors>
     </div>
 
     <div class="form-field">
@@ -183,12 +132,11 @@
         name="passport"
         [required]="isAdult"
         />
-        <div 
-        class="input-error"
-        *ngIf="passport.dirty && passport.errors?.['required']"
-        >
-        This is required
-        </div>
+      
+        <validation-errors 
+        *ngIf="passport.dirty" 
+        [errors]="passport.errors"
+        ></validation-errors>
     </div>
 
     <fieldset ngModelGroup="address">
@@ -204,12 +152,11 @@
             name="street"
             required
             />
-            <div 
-            class="input-error"
-            *ngIf="street.dirty && street.errors?.['required']"
-            >
-            This is required
-            </div>
+            
+            <validation-errors 
+            *ngIf="street.dirty" 
+            [errors]="street.errors"
+            ></validation-errors>
         </div>
 
         
@@ -223,12 +170,11 @@
             name="city"
             required
             />
-            <div 
-            class="input-error"
-            *ngIf="city.dirty && city.errors?.['required']"
-            >
-            This is required
-            </div>
+            
+                <validation-errors 
+                *ngIf="city.dirty" 
+                [errors]="city.errors"
+                ></validation-errors>
         </div>
 
         
@@ -242,12 +188,11 @@
             name="postCode"
             required
             />
-            <div 
-            class="input-error"
-            *ngIf="postCode.dirty && postCode.errors?.['required']"
-            >
-            This is required
-            </div>
+            
+                <validation-errors 
+                *ngIf="postCode.dirty" 
+                [errors]="postCode.errors"
+                ></validation-errors>
         </div>
     
 
@@ -267,18 +212,11 @@
             required
             minlength="6"
             />
-            <div 
-            class="input-error"
-            *ngIf="password.dirty && password.errors?.['required']"
-            >
-            This is required
-            </div>
-            <div 
-            class="input-error"
-            *ngIf="password.dirty && password.errors?.['minlength']"
-            >
-            The length should be {{password.errors?.['minlength']?.['requiredLength'] }} characters
-            </div>
+            
+                <validation-errors 
+                *ngIf="password.dirty" 
+                [errors]="password.errors"
+                ></validation-errors>
         </div>
 
         
@@ -292,17 +230,11 @@
             name="confirmPassword"
             required
             />
-            <div 
-            class="input-error"
-            *ngIf="confirmPassword.dirty && confirmPassword.errors?.['required']"
-            >
-            This is required
-            </div>
-            <div class="input-error"
-            *ngIf="confirmPassword.dirty && confirmPassword.errors?.['passwordShouldMatch']"
-            >
-            Password do not match
-            </div>
+           
+            <validation-errors 
+            *ngIf="confirmPassword.dirty" 
+            [errors]="confirmPassword.errors"
+            ></validation-errors>
         </div>
 
     </fieldset>

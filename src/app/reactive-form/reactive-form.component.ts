@@ -5,13 +5,14 @@ import { UserSkillsService } from '../services/user-skills.service';
 import { Observable, bufferCount, filter, tap } from 'rxjs';
 import { UniqueNameValidator } from '../validators/unique-username.directive';
 import { CustomValidators } from '../validators/CustomValidators';
+import { ValidationErrorsComponent } from '../global-error-validation/validation-errors/validation-errors.component';
 
 @Component({
   selector: 'reactive-form',
   templateUrl: './reactive-form.component.html',
   standalone:true,
   styleUrls: ['./reactive-form.component.scss'],
-  imports:[ReactiveFormsModule,CommonModule],
+  imports:[ReactiveFormsModule,CommonModule,ValidationErrorsComponent],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class ReactiveFormComponent implements OnInit {
