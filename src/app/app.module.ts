@@ -9,7 +9,7 @@ import { DynamicFormComponent } from './dynamic/dynamic-form/dynamic-form.compon
 import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

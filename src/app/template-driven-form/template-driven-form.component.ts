@@ -6,6 +6,7 @@ import { PasswordShouldMatchDirective } from '../validators/password-should-matc
 import { UniqueUsernameDirective } from '../validators/unique-username.directive';
 import { ValidationErrorsComponent } from '../global-error-validation/validation-errors/validation-errors.component';
 import { DynamicValidatorMessageDirective } from '../global-error-validation/dynamic-validator-message.directive';
+import { DynamicValidatorMessageContainer } from '../global-error-validation/dynamic-validator-message-container.directive';
 
 @Component({
   selector: 'template-form',
@@ -14,7 +15,7 @@ import { DynamicValidatorMessageDirective } from '../global-error-validation/dyn
   styleUrls:['./template-driven-form.component.scss'],
   imports:[FormsModule,CommonModule,
     BanWordsDirective,PasswordShouldMatchDirective,UniqueUsernameDirective,
-    ValidationErrorsComponent,DynamicValidatorMessageDirective
+    ValidationErrorsComponent,DynamicValidatorMessageDirective,DynamicValidatorMessageContainer
   ],
   changeDetection:ChangeDetectionStrategy.OnPush
 })

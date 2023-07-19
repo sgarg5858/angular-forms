@@ -19,8 +19,9 @@ export class DynamicValidatorMessageDirective implements OnInit,OnDestroy {
   ngControl = inject(NgControl,{self:true,optional:true}) || inject(ControlContainer,{self:true,optional:true});
 
   @Input() errorStateMatcher = inject(ErrorStateMatcher);
+  @Input() container= inject(ViewContainerRef);
+
   private parentContainer= inject(ControlContainer,{optional:true});
-  private viewContainerRef= inject(ViewContainerRef);
   private cd = inject(ChangeDetectorRef);
 
   get form()
@@ -50,7 +51,7 @@ export class DynamicValidatorMessageDirective implements OnInit,OnDestroy {
         {
           if(!this.componentRef)
           {
-            this.componentRef=this.viewContainerRef.createComponent(ValidationErrorsComponent);
+            this.componentRef=this.container.createComponent(ValidationErrorsComponent);
           }
           //Putting it outside as , it might happen, that just error changes
           this.componentRef.instance.errors=this.ngControl?.errors;

@@ -154,7 +154,11 @@
 
     </fieldset>
 
-    <fieldset ngModelGroup="password" passwordShouldMatch withoutValidationErrors>
+    <fieldset 
+    ngModelGroup="password" 
+    passwordShouldMatch 
+    [container]="containerDir.container"
+     >
         <legend>User Password</legend>
 
         <div class="form-field">
@@ -175,6 +179,7 @@
             <label for="confirmPassword">Confirm Password</label>
             <input 
             id="=confirmPassword"
+            withoutValidationErrors
             type="password"  
             [ngModel]="userInfo.confirmPassword" 
             #confirmPassword="ngModel"
@@ -183,6 +188,12 @@
             />
 
         </div>
+
+        <ng-container 
+        validatorMessageContainer 
+        #containerDir="validatorMessageContainer">
+
+        </ng-container>
 
     </fieldset>
 
